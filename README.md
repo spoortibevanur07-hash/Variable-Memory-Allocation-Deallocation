@@ -51,8 +51,8 @@ let student = { name: "Asha" }; // object stored in heap
 
 - `count` is a primitive value
 - `student` points to an object created in heap memory
-
 ---
+
 
 ## 3. How long does variable memory stay valid?
 The validity or lifetime of a variable depends on its scope and the runtime memory management rules.
