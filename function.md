@@ -1,561 +1,352 @@
-# Functions in Python
+# Python Functions
 
-A function is a reusable block of code that performs a specific task. Instead of writing the same lines multiple times, you define a function once and call it whenever needed. Functions help make programs shorter, easier to understand, easier to test, and easier to maintain.
+A function is a reusable, named block of code that performs a task. Functions help reduce repetition, organize a program into smaller parts, and make logic easier to test and maintain.
 
-## Why do we use functions?
+## Why use functions?
 
-Functions solve a very common programming problem: repetition.
-
-Without functions, the same instructions may be copied again and again. This leads to:
-
-- repeated code
-- difficult maintenance
-- greater chance of mistakes
-- poor code organization
-- harder debugging and testing
-
-With functions, you can:
-
-- reuse logic
-- reduce repetition
-- organize code into meaningful sections
-- write cleaner programs
-- test smaller parts of the program separately
-
-Example:
-
-```python
-print("sandhya")
-print("apoorva")
-print("spoorti")
-print("bhagirathi")
-```
-
-The above prints the same type of message four times. This is repetitive. A function can simplify it:
+Without functions, similar instructions may need to be copied throughout a program. Repeated code is harder to update and makes mistakes more likely. A function lets you write an operation once and reuse it with different inputs.
 
 ```python
 def welcome(name):
-    print("welcome", name)
+    print("Welcome,", name)
 
-welcome("sandhya")
-welcome("apoorva")
-welcome("spoorti")
-welcome("bhagirathi")
+
+welcome("Asha")
+welcome("Ravi")
 ```
 
-This is much cleaner and reusable.
+## Define and call a function
 
----
-
-## What exactly is a function?
-
-A function is a named block of code that can be executed whenever needed.
-
-It usually contains:
-
-- a unique function name
-- optional parameters
-- a body of statements
-- an optional return value
-
-A function can be used to perform a task like adding numbers, validating input, printing a message, or processing data.
-
-### Basic function syntax
-
-```python
-def function_name(parameters):
-    # body of the function
-    statement 1
-    statement 2
-    return value    # optional
-```
-
-The `def` keyword tells Python that we are defining a function.
-
----
-
-## Defining vs calling a function
-
-### Defining a function
+Use the `def` keyword to define a function. The indented statements form its body. Defining a function does not run it; calling the function does.
 
 ```python
 def greet():
-    print("hello")
-```
+    print("Hello!")
 
-This only defines the function. It does not run the code inside it yet.
 
-### Calling a function
-
-```python
 greet()
 ```
 
-This executes the function body and prints the message.
+The parentheses in `greet()` are part of the call. A function can also be defined without parameters, as above, or with parameters that receive input values.
 
-So,
+## Parameters and arguments
 
-- definition creates the function
-- call runs the function
-
----
-
-## Function without parameters
-
-A function may not need any input values.
-
-```python
-def welcome():
-    print("welcome to Nighan2 Labs")
-
-welcome()
-```
-
-This is the simplest form of a function.
-
-It is useful when the function does not depend on external input.
-
----
-
-## Function with parameters
-
-A parameter is a variable used inside the function definition. An argument is the actual value passed when the function is called.
+A **parameter** is a name in a function definition. An **argument** is a value supplied when the function is called.
 
 ```python
 def welcome(name):
-    print("welcome", name)
+    print("Welcome,", name)
 
-welcome("sandhya")
+
+welcome("Asha")
 ```
 
-Here:
-
-- `name` is the parameter
-- `"sandhya"` is the argument
-
-A function may have one parameter or many parameters.
-
-### Example with multiple parameters
+Here, `name` is a parameter and `"Asha"` is the argument. A function can accept multiple parameters:
 
 ```python
-def add(a, b):
-    print(a + b)
+def add(first, second):
+    return first + second
 
-add(10, 20)
+
+print(add(10, 20))  # 30
 ```
 
-This prints:
+## Return values
+
+`return` sends a result back to the code that called the function. The caller can store the result, use it in another calculation, or display it.
 
 ```python
-30
+def add(first, second):
+    return first + second
+
+
+total = add(10, 20)
+print(total)  # 30
 ```
 
----
-
-## Return statement
-
-The `return` statement is one of the most important parts of a function.
-
-A function can either:
-
-- print something and display output
-- return a value back to the caller
-
-### Difference between `print()` and `return`
+`print()` displays a value; it does not return that value to the caller. If a function reaches the end without a `return` statement, it returns `None`. A `return` statement also ends the current function call immediately, so statements after it are not executed.
 
 ```python
-def add(a, b):
-    print(a + b)
+def describe_number(number):
+    if number < 0:
+        return "negative"
+    return "zero or positive"
 ```
 
-This displays the result on the screen, but the function does not send the result back for further use.
+Python functions can return multiple values. They are packaged as a tuple and can be unpacked by the caller.
 
 ```python
-def add(a, b):
-    return a + b
+def calculate(first, second):
+    return first + second, first - second, first * second
 
-result = add(10, 20)
-print(result)
+
+sum_result, difference, product = calculate(10, 5)
+print(sum_result, difference, product)  # 15 5 50
 ```
 
-This is better because the result is sent back to the caller. Then the caller can store it, compare it, or print it later.
+## Passing arguments
 
-### Important point
+### Positional arguments
 
-`return` immediately exits the function.
-
-```python
-def text():
-    return 10
-    print("hello")
-```
-
-The line `print("hello")` never executes because Python exits the function as soon as it reaches `return`.
-
----
-
-## Multiple return values
-
-Python allows a function to return more than one value.
+Positional arguments are assigned to parameters by their order in the call.
 
 ```python
-def calculate(a, b):
-    return a + b, a - b, a * b
-
-x, y, z = calculate(10, 5)
-print(x)
-print(y)
-print(z)
-```
-
-Output:
-
-```python
-15
-5
-50
-```
-
-This works because Python returns a tuple of values.
-
----
-
-## Default parameters
-
-A default parameter provides a value when the caller does not pass one.
-
-```python
-def greet(name="sandhya"):
-    print("hello", name)
-
-greet()
-greet("apoorva")
-```
-
-Output:
-
-```python
-hello sandhya
-hello apoorva
-```
-
-Default parameters are useful when a value is optional.
-
----
-
-## Positional arguments
-
-Python matches arguments to parameters by position.
-
-```python
-def student(name, age):
+def show_student(name, age):
     print(name, age)
 
-student("sandhya", 21)
+
+show_student("Asha", 21)
 ```
 
-This works because the first argument goes to `name` and the second goes to `age`.
+### Keyword arguments
 
----
-
-## Keyword arguments
-
-Keyword arguments pass values using the parameter name.
+Keyword arguments identify parameters by name. Their order does not matter.
 
 ```python
-def student(name, age):
+def show_student(name, age):
     print(name, age)
 
-student(age=21, name="sandhya")
+
+show_student(age=21, name="Asha")
 ```
 
-This works because names are explicitly matched.
+Positional arguments must come before keyword arguments in a call. For example, `show_student("Asha", age=21)` is valid, but `show_student(name="Asha", 21)` is not.
 
-The order does not matter when using keyword arguments.
+### Default parameter values
 
----
-
-## Positional and keyword arguments together
+A default value makes an argument optional when the function is called.
 
 ```python
-def student(name, age, course):
-    print(name, age, course)
+def greet(name="there"):
+    print("Hello,", name)
 
-student("sandhya", 21, "BCA")
+
+greet()         # Hello, there
+greet("Asha")   # Hello, Asha
 ```
 
-This uses positional arguments.
+Parameters with defaults should follow required parameters in the function definition.
+
+### Arbitrary positional arguments: `*args`
+
+Use `*args` when a function should accept any number of extra positional arguments. Inside the function, those arguments are available as a tuple.
 
 ```python
-def student(name, age, course):
-    print(name, age, course)
-
-student(name="sandhya", age=21, course="BCA")
-```
-
-This uses keyword arguments.
-
-### Important rule
-
-A positional argument cannot appear after a keyword argument in the same function call.
-
-```python
-def student(name, age, course):
-    print(name, age, course)
-
-student("spoorti", age=21, "BCA")
-```
-
-This is invalid and raises a syntax error.
-
----
-
-## Variable-length arguments: `*args`
-
-Sometimes you may not know how many arguments will be passed.
-
-`*args` collects extra positional arguments into a tuple.
-
-```python
-def add(*numbers):
+def add_all(*numbers):
     total = 0
     for number in numbers:
         total += number
     return total
 
-print(add(10, 20))
-print(add(10, 20, 30))
-print(add(1, 2, 3, 4, 5))
+
+print(add_all(10, 20))          # 30
+print(add_all(1, 2, 3, 4, 5))  # 15
 ```
 
-Output:
+### Arbitrary keyword arguments: `**kwargs`
+
+Use `**kwargs` to collect extra keyword arguments. Inside the function, they are available as a dictionary.
 
 ```python
-30
-60
-15
-```
-
-Here, `numbers` is a tuple containing all the incoming arguments.
-
-This is useful when a function should accept any number of values.
-
----
-
-## Variable-length keyword arguments: `**kwargs`
-
-`**kwargs` collects extra keyword arguments into a dictionary.
-
-```python
-def student(**details):
+def show_details(**details):
     print(details)
 
-student(name="sandhya", age=21, course="BCA")
+
+show_details(name="Asha", age=21, course="Python")
+# {'name': 'Asha', 'age': 21, 'course': 'Python'}
 ```
 
-Output:
+These parameter forms can be combined. Required parameters come first, followed by optional positional parameters, `*args`, and `**kwargs` as needed.
 
 ```python
-{'name': 'sandhya', 'age': 21, 'course': 'BCA'}
+def describe(first, second="default", *extra, **details):
+    print(first)
+    print(second)
+    print(extra)
+    print(details)
+
+
+describe("hello", "world", "again", language="Python")
 ```
 
-Here, `details` is a dictionary of all the passed keyword arguments.
+## Variable scope
 
-This is useful when the number of named values is unknown in advance.
+Scope determines where a name can be accessed.
 
----
+### Local variables
 
-## Combining positional and keyword arguments
-
-A function can have a general structure like this:
+A variable assigned inside a function is local to that function unless declared otherwise.
 
 ```python
-def example(a, b=10, *args, **kwargs):
-    print(a)
-    print(b)
-    print(args)
-    print(kwargs)
+def show_value():
+    value = 10
+    print(value)
 
-example(1, 2, 3, 4, 5, name="sandhya", age=21)
+
+show_value()
+# print(value)  # NameError: value is not defined here
 ```
 
-This function contains:
+### Global variables
 
-- a required positional parameter: `a`
-- an optional positional parameter: `b`
-- extra positional values in `*args`
-- extra keyword values in `**kwargs`
-
----
-
-## Scope: local vs global variables
-
-Scope defines where a variable can be used.
-
-### Local variable
-
-```python
-def test():
-    x = 10
-    print(x)
-
-test()
-```
-
-`x` is local to the function. It exists only inside `test()`.
-
-### Global variable
-
-```python
-x = 100
-
-def test():
-    print(x)
-
-test()
-```
-
-`x` is global, so the function can read it.
-
-### Important rule
-
-```python
-def test():
-    x = 10
-
-print(x)
-```
-
-This will raise an error because `x` is local to `test()` and not accessible outside.
-
----
-
-## Using `global`
-
-If you want to modify a global variable inside a function, you must use the `global` keyword.
+A function can read a global variable, but assigning to a global name from inside a function requires a `global` declaration.
 
 ```python
 count = 0
+
 
 def increment():
     global count
     count += 1
 
+
 increment()
-print(count)
+print(count)  # 1
 ```
 
-Output:
-
-```python
-1
-```
-
-Using global variables is sometimes necessary, but it is often better to pass values as arguments and return results instead of relying on global state.
-
-This makes code more reusable and easier to test.
-
----
+Prefer passing values as arguments and returning results when practical. This keeps functions easier to reuse and test and avoids hidden changes to shared state.
 
 ## Functions calling other functions
 
-Functions can call other functions.
+A function can call another function and use its return value.
 
 ```python
-def add(a, b):
-    return a + b
+def add(first, second):
+    return first + second
 
-def display():
-    result = add(10, 20)
-    print(result)
 
-display()
+def display_total():
+    total = add(10, 20)
+    print(total)
+
+
+display_total()  # 30
 ```
 
-Output:
+## How a function call flows
+
+When Python evaluates `multiply(5, 4)`, it finds the function, assigns `5` to `first` and `4` to `second`, runs the function body, and gives the returned value back to the caller.
 
 ```python
-30
+def multiply(first, second):
+    return first * second
+
+
+result = multiply(5, 4)
+print(result)  # 20
 ```
 
-This is a very common pattern in real software development. One function may validate data, another may calculate result, another may save data, and another may display it.
+The returned value is assigned to `result` after the function finishes.
 
-Typical flow:
+## Functions are objects
 
-```text
-main -> validate -> calculate -> save -> display
-```
-
----
-
-## Example of a complete function-based program
+In Python, a function is an object. You can assign it to another variable and call it through that name. Do not add parentheses when assigning the function itself; parentheses would call it immediately.
 
 ```python
-def add(a, b):
-    return a + b
+def greet():
+    print("Hello!")
 
 
-def subtract(a, b):
-    return a - b
+say_hello = greet
+say_hello()  # Hello!
+```
+
+## Higher-order functions
+
+A higher-order function accepts another function as an argument or returns a function. Because functions are objects, they can be passed around like other values.
+
+```python
+def square(number):
+    return number * number
+
+
+def process(operation, value):
+    return operation(value)
+
+
+print(process(square, 5))  # 25
+```
+
+## Lambda expressions
+
+A `lambda` expression creates a small anonymous function. It contains one expression and returns that expression's value. Use `def` for functions that need multiple statements or a descriptive reusable definition.
+
+```python
+square = lambda number: number * number
+print(square(5))  # 25
+```
+
+Lambda expressions are sometimes useful with functions such as `map()`:
+
+```python
+numbers = [1, 2, 3, 4]
+doubled = list(map(lambda number: number * 2, numbers))
+print(doubled)  # [2, 4, 6, 8]
+```
+
+For this simple transformation, a list comprehension is often easier to read:
+
+```python
+doubled = [number * 2 for number in numbers]
+```
+
+## Recursion
+
+Recursion is when a function calls itself. A recursive function needs a **base case** that stops the calls, and a recursive case that moves toward that base case.
+
+```python
+def countdown(number):
+    if number <= 0:  # Base case
+        print("Done!")
+        return
+
+    print(number)
+    countdown(number - 1)
+
+
+countdown(3)
+```
+
+The output is `3`, `2`, `1`, then `Done!`. Without a reachable base case, recursion continues until Python raises a `RecursionError`. For simple repetition, a loop is often more appropriate.
+
+## A complete example
+
+Functions can divide a program into small, meaningful steps.
+
+```python
+def add(first, second):
+    return first + second
+
+
+def subtract(first, second):
+    return first - second
 
 
 def main():
-    x = 10
-    y = 5
-    total = add(x, y)
-    difference = subtract(x, y)
-
-    print("Sum:", total)
-    print("Difference:", difference)
+    first = 10
+    second = 5
+    print("Sum:", add(first, second))
+    print("Difference:", subtract(first, second))
 
 
 main()
 ```
 
-This program shows how functions can be used to divide a task into simple, meaningful steps.
+## Function-writing guidelines
 
----
-
-## Best practices for functions
-
-- use descriptive names
-- keep functions focused on one task
-- avoid too many parameters
-- prefer returning values over printing inside deeply reusable logic
-- use default values when appropriate
-- avoid unnecessary global variables
-- write small functions that are easy to test
-
-Example of a good function:
+- Choose descriptive names that explain the function's purpose.
+- Keep each function focused on a clear task.
+- Return values when callers need to reuse or further process a result.
+- Use parameters instead of relying on global state where practical.
+- Avoid unnecessary parameters and overly complicated functions.
+- Add a docstring when a function's purpose or expected inputs are not obvious.
 
 ```python
 def calculate_area(length, width):
+    """Return the area of a rectangle."""
     return length * width
 ```
 
-This is clear, simple, and reusable.
-
----
-
 ## Summary
 
-Functions are a fundamental part of Python programming.
-
-They allow you to:
-
-- reuse code
-- reduce repetition
-- organize logic
-- simplify debugging
-- improve maintainability
-- build large programs from smaller components
-
-A function can accept parameters, return values, use defaults, and work with positional or keyword arguments. It may also call other functions and use local or global scope depending on the design.
-
-In short, functions make programs cleaner, modular, and easier to understand.
-
----
-
-## Final note
-
-Understanding functions is essential for writing effective Python programs. They are the building blocks of structured and reusable code. Once you master function creation, parameter passing, and return values, you are ready for more advanced programming topics such as modules, classes, recursion, and larger application design.
+Functions package behavior into reusable units. They can receive values through parameters, return results to their callers, and call or be passed to other functions. Understanding arguments, return values, scope, and recursion provides a strong foundation for writing clear Python programs.
