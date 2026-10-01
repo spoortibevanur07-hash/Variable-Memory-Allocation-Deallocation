@@ -303,7 +303,7 @@ A positional argument cannot appear after a keyword argument in the same functio
 def student(name, age, course):
     print(name, age, course)
 
-student("sandhya", age=21, "BCA")
+student("spoorti", age=21, "BCA")
 ```
 
 This is invalid and raises a syntax error.
